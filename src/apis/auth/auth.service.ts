@@ -52,7 +52,6 @@ export class AuthService {
 
   async socialLogin({ req, res }) {
     // 1. 회원조회
-
     const user = await this.userService.findOne({ email: req.user.email });
 
     // 2. 회원가입이 안되있다면 자동회원가입
@@ -64,6 +63,8 @@ export class AuthService {
         10,
       );
       await this.userService.createSocial({ createSocialUserInput });
+      res.redirect('https://wetrekking.kr/social');
+    } else if (!user.phone) {
       res.redirect('https://wetrekking.kr/social');
     } else {
       this.setRefreshToken({ user, res, req });
