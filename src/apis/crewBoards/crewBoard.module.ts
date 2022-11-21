@@ -3,6 +3,7 @@ import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CrewBoardImageService } from '../crewBoardImages/crewBoardImage.service';
 import { CrewBoardImage } from '../crewBoardImages/entities/crewBoardImage.entity';
+import { CrewComment } from '../crewComments/entities/crewComment.entity';
 import { CrewUserList } from '../crewUserList/entities/crewUserList.entity';
 import { DibService } from '../dib/dib.service';
 import { Dib } from '../dib/entities/dib.entity';
@@ -24,6 +25,7 @@ import { CrewBoard } from './entities/crewBoard.entity';
       Dib,
       CrewUserList,
       PointHistory,
+      CrewComment,
     ]),
     ElasticsearchModule.register({
       node: 'http://elasticsearch:9200',

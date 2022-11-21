@@ -3,6 +3,7 @@ import { ElasticsearchService } from '@nestjs/elasticsearch';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CrewBoardImage } from '../crewBoardImages/entities/crewBoardImage.entity';
+import { CrewComment } from '../crewComments/entities/crewComment.entity';
 import { CrewUserList } from '../crewUserList/entities/crewUserList.entity';
 import { Dib } from '../dib/entities/dib.entity';
 import { PointHistory } from '../pointHistory/entities/pointHistory.entity';
@@ -29,6 +30,9 @@ export class CrewBoardService {
 
     @InjectRepository(PointHistory)
     private readonly pointHistoryRepository: Repository<PointHistory>,
+
+    @InjectRepository(CrewComment)
+    private readonly crewCommentRepository: Repository<CrewComment>,
 
     private readonly elasticsearchService: ElasticsearchService,
   ) {}
@@ -323,14 +327,21 @@ export class CrewBoardService {
     });
 
     // 1. 댓글 삭제
+    this.crewCommentRepository.softDelete({ crewBoard: { id: crewBoardId } });
 
     // 2. 신청리스트 삭제
+    this.crewUserListRepository.softDelete({ crewBoard: { id: crewBoardId } });
 
     // 3. 찜 삭제
+    this.dibRepository.softDelete({ crewBoard: { id: crewBoardId } });
 
     // 4. 사진 삭제
+    this.crewBoardImageRepository.softDelete({
+      crewBoard: { id: crewBoardId },
+    });
 
-    this.crewBoardImageRepository.delete({ crewBoard: crewBoardId });
+    this.crewBoardImageRepository.softDelete({ crewBoard: crewBoardId });
+
     return result.affected ? true : false;
   }
 }

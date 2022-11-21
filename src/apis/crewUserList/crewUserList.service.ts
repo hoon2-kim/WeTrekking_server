@@ -49,6 +49,16 @@ export class CrewUserListService {
     });
   }
 
+  async findFinshList({ id }) {
+    return await this.crewUserListRepository.find({
+      where: {
+        id: id,
+        status: '완료',
+      },
+      relations: ['user', 'crewBoard', 'crewBoard.user', 'crewBoard.mountain'],
+    });
+  }
+
   async findVisitToList({ userId }) {
     const crewUserList = await this.crewUserListRepository
       .createQueryBuilder('crewUserList')

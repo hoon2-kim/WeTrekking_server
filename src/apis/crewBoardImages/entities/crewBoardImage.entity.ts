@@ -2,6 +2,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { CrewBoard } from 'src/apis/crewBoards/entities/crewBoard.entity';
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   JoinTable,
   ManyToOne,
@@ -27,4 +28,7 @@ export class CrewBoardImage {
   @ManyToOne(() => CrewBoard)
   @Field(() => CrewBoard)
   crewBoard: CrewBoard;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

@@ -12,6 +12,7 @@ import { CrewUserList } from '../crewUserList/entities/crewUserList.entity';
 import { Mountain } from '../mountains/entities/mountain.entity';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import { PointHistory } from '../pointHistory/entities/pointHistory.entity';
+import { CrewComment } from '../crewComments/entities/crewComment.entity';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PointHistory } from '../pointHistory/entities/pointHistory.entity';
       CrewUserList,
       Mountain,
       PointHistory,
+      CrewComment,
     ]),
     ElasticsearchModule.register({
       node: 'http://elasticsearch:9200',
