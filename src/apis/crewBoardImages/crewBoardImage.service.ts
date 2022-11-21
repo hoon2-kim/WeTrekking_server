@@ -33,6 +33,6 @@ export class CrewBoardImageService {
   }
 
   delete({ crewBoardId }) {
-    this.crewBoardImageRepository.delete({ crewBoard: crewBoardId });
+    return this.crewBoardImageRepository.delete({ crewBoard: crewBoardId });
   }
 }

@@ -197,9 +197,6 @@ export class CrewBoardService {
   }
 
   async findBySearch({ region, startDate, endDate, search }) {
-    // const newCrewBoard = [];
-    // const cutAlreadyDone = [];
-    // const pickedDate = [];
     let crewBoard;
     const newCrewBoard = [];
     const today = new Date();
@@ -324,6 +321,15 @@ export class CrewBoardService {
     const result = await this.crewBoardRepository.softDelete({
       id: crewBoardId,
     });
+
+    // 1. 댓글 삭제
+
+    // 2. 신청리스트 삭제
+
+    // 3. 찜 삭제
+
+    // 4. 사진 삭제
+
     this.crewBoardImageRepository.delete({ crewBoard: crewBoardId });
     return result.affected ? true : false;
   }

@@ -206,7 +206,7 @@ type Query {
   fetchReviewBoard(reviewBoardId: String!): ReviewBoard!
   fetchReviewBoards: [[ReviewBoard!]!]!
   fetchUser: User!
-  fetchMountainKing: ReviewCount!
+  fetchMountainKing: [ReviewCount!]!
 
   """boardId에 해당하는 댓글 전체 조회"""
   fetchCrewComments(boardId: String!, page: Int): [CrewComment!]!

@@ -179,7 +179,7 @@ export class UserResolver {
     });
   }
 
-  @Query(() => ReviewCount)
+  @Query(() => [ReviewCount])
   async fetchMountainKing() {
     const count = await this.reviewCountRepository.find({
       relations: ['user'],
