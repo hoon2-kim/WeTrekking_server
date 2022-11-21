@@ -187,6 +187,7 @@ type Query {
   fetchMountainsWithSearch(search: String!): [Mountain!]!
   fetchPointPayment: PointPayment!
   fetchPointPayments: [[PointPayment!]!]!
+  checkCancellable(amount: Float!): Boolean!
   fetchDibs: [DibsWithCrewBoard!]!
   fetchCrewBoard(crewBoardId: String!): CrewBoard!
   fetchAllCrewBoards: [CrewBoard!]!

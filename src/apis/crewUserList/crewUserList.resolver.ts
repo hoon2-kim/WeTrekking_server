@@ -104,49 +104,68 @@ export class CrewUserListResolver {
     @Context() context: IContext,
     @Args('crewBoardId') crewBoardId: string, //
   ) {
+    // 1. 정보 가져오기
     const userId = context.req.user.id;
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+    const crewBoard = await this.crewBoardRepository.findOne({
+      where: { id: crewBoardId },
+      relations: ['user'],
+    });
+
+    // 2. 중복 신청 체크
     const find = await this.crewUserListService.findCrewList({
       crewBoardId,
       userId,
     });
-
     if (find.length !== 0) {
       throw new Error('이미 신청한 게시글입니다.');
     }
 
-    const crewUserList = await this.crewUserListService.create({
-      userId,
+    // 3. 모집 완료여부 확인
+    const count = await this.crewUserListService.findAcceptedList({
       crewBoardId,
     });
+    if (crewBoard.peoples === count.length) {
+      throw new Error('모집 완료된 게시글입니다.');
+    }
 
-    const user = await this.userRepository.findOne({
-      where: { id: userId },
-    });
+    // 4. 성별 체크
+    // 4-1. 게시글이 남자만인데 신청자가 여자이면
+    if (crewBoard.gender === '남자만' && user.gender === 'female') {
+      throw new Error('남자만 신청 가능합니다!');
+    }
+    // 4-2. 게시글이 여자만인데 신청자가 남자이면
+    if (crewBoard.gender === '여자만' && user.gender === 'male') {
+      throw new Error('여자만 신청 가능합니다!');
+    }
+
+    // 5. 돈 체크
     if (user.point < 200) {
       throw new Error('포인트가 부족합니다! 포인트를 충전해주세요');
       // console.log('포인트가 부족하지만 개발 중이기에 넘어가준다.');
     }
-
     await this.userRepository.update(
       { id: userId },
       { point: user.point - 200 },
       // { point: user.point }, // 개발중으로 아직 포인트 안뻇어감
     );
-
     await this.pointHistoryRepository.save({
       amount: -200,
       user: { id: userId },
     });
 
-    const crewBoard = await this.crewBoardRepository.findOne({
-      where: { id: crewBoardId },
-      relations: ['user'],
+    // 6. 리스트 신청
+    await this.crewUserListService.create({
+      userId,
+      crewBoardId,
     });
-    console.log(crewBoard);
+
+    // 7. email 전송
     const nickname = user.nickname;
     const crewBoardTitle = crewBoard.title;
     const email = crewBoard.user.email;
-    console.log(email);
 
     const result = await this.emailService.getApplyTemplate({
       nickname,
