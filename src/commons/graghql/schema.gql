@@ -50,6 +50,17 @@ type CrewBoardImage {
   crewBoard: CrewBoard!
 }
 
+type CrewComment {
+  id: String!
+  comment: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+  crewBoard: CrewBoard!
+  user: User!
+  subCrewComment: CrewComment!
+}
+
 type CrewUserList {
   id: String!
   status: String!
@@ -106,17 +117,6 @@ type ReviewBoardImage {
   imgUrl: String!
   isMain: Boolean!
   reviewBoard: ReviewBoard!
-}
-
-type CrewComment {
-  id: String!
-  comment: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime!
-  crewBoard: CrewBoard!
-  user: User!
-  subCrewComment: CrewComment!
 }
 
 type Chat {

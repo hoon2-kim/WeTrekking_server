@@ -239,6 +239,10 @@ export class CrewUserListResolver {
   async finishCrew(
     @Args('id') id: string, //
   ) {
+    const checkAlready = this.crewUserListService.findFinshList({ id });
+    if (checkAlready) {
+      throw new Error('이미 완료 처리 되었습니다.');
+    }
     return this.crewUserListService.update({
       id,
       status: '완료',

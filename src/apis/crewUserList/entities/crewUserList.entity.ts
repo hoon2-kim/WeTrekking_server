@@ -3,6 +3,7 @@ import { CrewBoard } from 'src/apis/crewBoards/entities/crewBoard.entity';
 import { User } from 'src/apis/users/entities/user.entity';
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   JoinTable,
   ManyToOne,
@@ -29,4 +30,7 @@ export class CrewUserList {
   @ManyToOne(() => CrewBoard)
   @Field(() => CrewBoard)
   crewBoard: CrewBoard;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
