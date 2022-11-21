@@ -24,10 +24,10 @@ export class PhoneResolver {
       const phoneToken = this.phoneService.createToken();
 
       // 핸드폰 sms 보내기
-      // const smsToken = this.phoneService.sendToTokenPhone({
-      //   phone,
-      //   phoneToken,
-      // });
+      const smsToken = this.phoneService.sendToTokenPhone({
+        phone,
+        phoneToken,
+      });
       await this.cacheManager.set(phone, phoneToken, { ttl: 800 });
       this.cacheManager.get(phone).then((res) => console.log(res));
 
