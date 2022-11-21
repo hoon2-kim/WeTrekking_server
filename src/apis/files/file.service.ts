@@ -15,20 +15,22 @@ export class FileService {
       keyFilename: process.env.STORAGE_KEY_FILE_NAME,
     }).bucket(bucket);
 
-    const result = await waitedFiles.map(
-      (el) =>
-        new Promise((resolve, reject) => {
-          el.createReadStream()
-            .pipe(
-              storage
-                .file(`crewBoard/${uuid}${el.filename}`)
-                .createWriteStream(),
-            )
-            .on('finish', () =>
-              resolve(`${bucket}/crewBoard/${uuid}${el.filename}`),
-            )
-            .on('error', () => reject(console.log('실패')));
-        }),
+    const result = await Promise.all(
+      waitedFiles.map(
+        (el) =>
+          new Promise((resolve, reject) => {
+            el.createReadStream()
+              .pipe(
+                storage
+                  .file(`crewBoard/${uuid}${el.filename}`)
+                  .createWriteStream(),
+              )
+              .on('finish', () =>
+                resolve(`${bucket}/crewBoard/${uuid}${el.filename}`),
+              )
+              .on('error', () => reject(console.log('실패')));
+          }),
+      ),
     );
     console.log(result);
     return result;
@@ -45,20 +47,22 @@ export class FileService {
       keyFilename: process.env.STORAGE_KEY_FILE_NAME,
     }).bucket(bucket);
 
-    const result = await waitedFiles.map(
-      (el) =>
-        new Promise((resolve, reject) => {
-          el.createReadStream()
-            .pipe(
-              storage
-                .file(`reviewBoard/${uuid}${el.filename}`)
-                .createWriteStream(),
-            )
-            .on('finish', () =>
-              resolve(`${bucket}/reviewBoard/${uuid}${el.filename}`),
-            )
-            .on('error', () => reject(console.log('실패')));
-        }),
+    const result = await Promise.all(
+      waitedFiles.map(
+        (el) =>
+          new Promise((resolve, reject) => {
+            el.createReadStream()
+              .pipe(
+                storage
+                  .file(`reviewBoard/${uuid}${el.filename}`)
+                  .createWriteStream(),
+              )
+              .on('finish', () =>
+                resolve(`${bucket}/reviewBoard/${uuid}${el.filename}`),
+              )
+              .on('error', () => reject(console.log('실패')));
+          }),
+      ),
     );
     console.log(result);
     return result;
