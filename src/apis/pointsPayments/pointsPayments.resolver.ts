@@ -4,9 +4,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Args, Context, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { InjectRepository } from '@nestjs/typeorm';
 import { GqlAuthAccessGuard } from 'src/commons/auth/gql-auth.guard';
 import { IContext } from 'src/commons/type/context';
+import { Repository } from 'typeorm';
 import { IamportService } from '../iamport/iamport.service';
+import { User } from '../users/entities/user.entity';
 import {
   PointPayment,
   POINT_PAYMENT_STATUS_ENUM,
@@ -18,6 +21,9 @@ export class PointPaymentResolver {
   constructor(
     private readonly pointPaymentService: PointPaymentService,
     private readonly iamportService: IamportService,
+
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   @UseGuards(GqlAuthAccessGuard)
@@ -103,6 +109,20 @@ export class PointPaymentResolver {
         '위/변조 된 결제: 결제 금액이 일치하지 않습니다.',
       );
     }
+  }
+
+  @UseGuards(GqlAuthAccessGuard)
+  @Query(() => Boolean)
+  async checkCancellable(
+    @Args('amount') amount: number,
+    @Context() context: IContext, //
+  ) {
+    const userId = context.req.user.id;
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+
+    return amount <= user.point ? true : false;
   }
 
   @UseGuards(GqlAuthAccessGuard)
