@@ -1,6 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ReviewBoard } from 'src/apis/reviewBoards/entities/reviewBoard.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -20,4 +26,7 @@ export class ReviewBoardImage {
   @ManyToOne(() => ReviewBoard)
   @Field(() => ReviewBoard)
   reviewBoard: ReviewBoard;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
