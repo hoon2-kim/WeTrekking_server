@@ -4,6 +4,7 @@ import { User } from 'src/apis/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   JoinTable,
@@ -48,4 +49,7 @@ export class ReviewBoard {
   @CreateDateColumn()
   @Field(() => Date)
   createdAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

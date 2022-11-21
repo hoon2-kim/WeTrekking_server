@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ReviewBoardImage } from '../reviewBoardImages/entities/reviewBoardImage.entity';
+import { ReviewComment } from '../reviewComments/entities/reviewComment.entity';
 import { ReviewCount } from '../reviewCount/reviewCount.entity';
 import { User } from '../users/entities/user.entity';
 import { ReviewBoard } from './entities/reviewBoard.entity';
@@ -10,6 +12,10 @@ export class ReviewBoardService {
   constructor(
     @InjectRepository(ReviewBoard)
     private readonly reviewBoardRepository: Repository<ReviewBoard>,
+    @InjectRepository(ReviewComment)
+    private readonly reviewCommentRepository: Repository<ReviewComment>,
+    @InjectRepository(ReviewBoardImage)
+    private readonly reviewBoardImageRepository: Repository<ReviewBoardImage>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(ReviewCount)
@@ -102,6 +108,17 @@ export class ReviewBoardService {
     const result = await this.reviewBoardRepository.softDelete({
       id: reviewBoardId,
     });
+
+    // 1. 이미지 삭제
+    this.reviewBoardImageRepository.softDelete({
+      reviewBoard: { id: reviewBoardId },
+    });
+
+    // 2. 댓글 삭제
+    this.reviewCommentRepository.softDelete({
+      reviewBoard: { id: reviewBoardId },
+    });
+
     return result.affected ? true : false;
   }
 }
