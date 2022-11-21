@@ -64,7 +64,7 @@ export class AuthService {
         10,
       );
       await this.userService.createSocial({ createSocialUserInput });
-      res.redirect('https://develop.wetrekking.kr/social');
+      res.redirect('https://wetrekking.kr/social');
     } else {
       this.setRefreshToken({ user, res, req });
 
