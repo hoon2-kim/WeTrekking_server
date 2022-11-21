@@ -43,7 +43,7 @@ export class CrewUserListService {
         crewBoard: {
           id: crewBoardId,
         },
-        status: '수락',
+        status: '수락' || '완료',
       },
       relations: ['user', 'crewBoard', 'crewBoard.user', 'crewBoard.mountain'],
     });
