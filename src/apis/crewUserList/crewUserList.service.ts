@@ -43,12 +43,23 @@ export class CrewUserListService {
         crewBoard: {
           id: crewBoardId,
         },
-        status: '수락' || '완료',
+        status: '수락',
       },
       relations: ['user', 'crewBoard', 'crewBoard.user', 'crewBoard.mountain'],
     });
   }
 
+  async findFinshListByBoardId({ crewBoardId }) {
+    return await this.crewUserListRepository.find({
+      where: {
+        crewBoard: {
+          id: crewBoardId,
+        },
+        status: '완료',
+      },
+      relations: ['user', 'crewBoard', 'crewBoard.user', 'crewBoard.mountain'],
+    });
+  }
   async findFinshList({ id }) {
     return await this.crewUserListRepository.find({
       where: {
