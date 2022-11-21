@@ -119,6 +119,15 @@ type ReviewBoardImage {
   reviewBoard: ReviewBoard!
 }
 
+type ReviewComment {
+  id: String!
+  reviewComment: String
+  createdAt: DateTime!
+  deletedAt: DateTime!
+  user: User!
+  reviewBoard: ReviewBoard!
+}
+
 type Chat {
   name: String!
   roomName: String!
@@ -130,15 +139,6 @@ type Room {
   roomName: String!
   boardId: String!
   user: String!
-}
-
-type ReviewComment {
-  id: String!
-  reviewComment: String
-  createdAt: DateTime!
-  deletedAt: DateTime!
-  user: User!
-  reviewBoard: ReviewBoard!
 }
 
 type PointPayment {

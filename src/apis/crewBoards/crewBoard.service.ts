@@ -73,6 +73,7 @@ export class CrewBoardService {
             crewBoardId: crewBoard.id,
           })
           .andWhere('crewUserList.status = "수락"')
+          .orWhere('crewUserList.status = "완료"')
           .getMany();
 
         const assignedUsers = [];
