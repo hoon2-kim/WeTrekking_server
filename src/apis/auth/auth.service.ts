@@ -68,7 +68,7 @@ export class AuthService {
     } else {
       this.setRefreshToken({ user, res, req });
 
-      res.redirect('https://develop.wetrekking.kr');
+      res.redirect('https://wetrekking.kr');
     }
   }
 }
