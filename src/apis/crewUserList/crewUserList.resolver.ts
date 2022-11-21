@@ -67,9 +67,14 @@ export class CrewUserListResolver {
     @Context() context: IContext, //
     @Args('crewBoardId') crewBoardId: string,
   ) {
-    const result = await this.crewUserListService.findAcceptedList({
+    const accept = await this.crewUserListService.findAcceptedList({
       crewBoardId,
     });
+    const finish = await this.crewUserListService.findFinshListByBoardId({
+      crewBoardId,
+    });
+    const result = accept.concat(finish);
+
     result.unshift(
       result.splice(
         result.findIndex((x) => x.crewBoard.user.id === x.user.id),
