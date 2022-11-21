@@ -209,12 +209,25 @@ export class CrewUserListResolver {
   async acceptCrew(
     @Args('id') id: string, //
   ) {
+    // 1. 정보 조회
+    const crewUserId = await this.crewUserListService.findOne({ id });
+    const crewBoardId = crewUserId.crewBoard.id;
+
+    // 2. 참가 가능인원 초과 시 수락 불가
+    const count = await this.crewUserListService.findAcceptedList({
+      crewBoardId,
+    });
+    if (crewUserId.crewBoard.peoples === count.length) {
+      throw new Error('모집 완료된 게시글입니다.');
+    }
+
+    // 3. 수락
     const crewUserList = await this.crewUserListService.update({
       id,
       status: '수락',
     });
-    const crewUserId = await this.crewUserListService.findOne({ id });
 
+    // 4. 이메일 전송
     const email = crewUserId.user.email;
     const nickname = crewUserId.user.nickname;
     const crewBoardTitle = crewUserId.crewBoard.title;
