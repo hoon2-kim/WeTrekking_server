@@ -133,11 +133,11 @@ export class CrewUserListResolver {
 
     // 4. 성별 체크
     // 4-1. 게시글이 남자만인데 신청자가 여자이면
-    if (crewBoard.gender === '남자만' && user.gender === 'female') {
+    if (crewBoard.gender === 'male' && user.gender === 'female') {
       throw new Error('남자만 신청 가능합니다!');
     }
     // 4-2. 게시글이 여자만인데 신청자가 남자이면
-    if (crewBoard.gender === '여자만' && user.gender === 'male') {
+    if (crewBoard.gender === 'female' && user.gender === 'male') {
       throw new Error('여자만 신청 가능합니다!');
     }
 
@@ -259,7 +259,7 @@ export class CrewUserListResolver {
     @Args('id') id: string, //
   ) {
     const checkAlready = this.crewUserListService.findFinshList({ id });
-    if (checkAlready) {
+    if (checkAlready[0]) {
       throw new Error('이미 완료 처리 되었습니다.');
     }
     return this.crewUserListService.update({

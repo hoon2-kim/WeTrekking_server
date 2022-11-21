@@ -213,6 +213,7 @@ export class UserResolver {
     this.emailService.sendTemplateToEmail({ email, result, comment });
     return user;
   }
+
   // 유저 업데이트
   @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => User)
