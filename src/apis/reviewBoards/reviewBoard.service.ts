@@ -114,10 +114,6 @@ export class ReviewBoardService {
       throw new Error('포인트 부족으로 리뷰를 삭제할 수 없습니다.');
     }
 
-    const result = await this.reviewBoardRepository.delete({
-      id: reviewBoardId,
-    });
-
     // 1. 이미지 삭제
     this.reviewBoardImageRepository.delete({
       reviewBoard: { id: reviewBoardId },
@@ -126,6 +122,10 @@ export class ReviewBoardService {
     // 2. 댓글 삭제
     this.reviewCommentRepository.delete({
       reviewBoard: { id: reviewBoardId },
+    });
+
+    const result = await this.reviewBoardRepository.delete({
+      id: reviewBoardId,
     });
 
     // 3. 돈 회수
