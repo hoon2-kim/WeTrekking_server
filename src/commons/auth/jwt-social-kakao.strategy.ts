@@ -32,7 +32,7 @@ export class JwtKakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
       name: '',
       nickname: profile.username,
       phone: '',
-      gender: kakao_account.gender,
+      gender: '',
       birth: '',
     };
   }

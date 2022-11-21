@@ -80,8 +80,10 @@ export class ReviewBoardResolver {
   @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => Boolean)
   deleteReviewBoard(
+    @Context() context: IContext,
     @Args('reviewBoardId') reviewBoardId: string, //
   ) {
-    return this.reviewBoardService.delete({ reviewBoardId });
+    const userId = context.req.user.id;
+    return this.reviewBoardService.delete({ userId, reviewBoardId });
   }
 }

@@ -104,20 +104,35 @@ export class ReviewBoardService {
     });
   }
 
-  async delete({ reviewBoardId }) {
-    const result = await this.reviewBoardRepository.softDelete({
+  async delete({ userId, reviewBoardId }) {
+    // 사용자 정보 가져오기
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (user.point < 100) {
+      throw new Error('포인트 부족으로 리뷰를 삭제할 수 없습니다.');
+    }
+
+    const result = await this.reviewBoardRepository.delete({
       id: reviewBoardId,
     });
 
     // 1. 이미지 삭제
-    this.reviewBoardImageRepository.softDelete({
+    this.reviewBoardImageRepository.delete({
       reviewBoard: { id: reviewBoardId },
     });
 
     // 2. 댓글 삭제
-    this.reviewCommentRepository.softDelete({
+    this.reviewCommentRepository.delete({
       reviewBoard: { id: reviewBoardId },
     });
+
+    // 3. 돈 회수
+    await this.userRepository.update(
+      { id: userId },
+      { point: user.point - 100 },
+    );
 
     return result.affected ? true : false;
   }
