@@ -28,10 +28,10 @@ export class ReviewBoardImageService {
         isMain: i === 0 ? true : false,
         reviewBoard: { id: reviewBoardId },
       });
-      return await this.findByReviewBoardId({
-        reviewBoardId,
-      });
     }
+    return await this.findByReviewBoardId({
+      reviewBoardId,
+    });
   }
 
   delete({ reviewBoardId }) {
