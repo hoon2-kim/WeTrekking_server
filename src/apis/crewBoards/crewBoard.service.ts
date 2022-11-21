@@ -73,11 +73,24 @@ export class CrewBoardService {
             crewBoardId: crewBoard.id,
           })
           .andWhere('crewUserList.status = "수락"')
-          .orWhere('crewUserList.status = "완료"')
+          .getMany();
+
+        const filteredList2 = await this.crewUserListRepository
+          .createQueryBuilder('crewUserList')
+          .leftJoinAndSelect('crewUserList.crewBoard', 'crewBoard')
+          .leftJoinAndSelect('crewUserList.user', 'user')
+          .where('crewBoard.id = :crewBoardId', {
+            crewBoardId: crewBoard.id,
+          })
+          .andWhere('crewUserList.status = "완료"')
           .getMany();
 
         const assignedUsers = [];
         filteredList.map((el) => {
+          // console.log(el.user);
+          assignedUsers.push(el.user);
+        });
+        filteredList2.map((el) => {
           // console.log(el.user);
           assignedUsers.push(el.user);
         });
