@@ -54,21 +54,25 @@ export class AuthService {
     // 1. 회원조회
     const user = await this.userService.findOne({ email: req.user.email });
 
-    // 2. 회원가입이 안되있다면 자동회원가입
+    // 2. 회원가입이 안되있다면 자동회원가입 (원래 기획)
+    // 2-1. 임시로 회원가입 후에만 소셜 이용가능 로직
     if (!user) {
-      const createSocialUserInput = { ...req.user };
+      // const createSocialUserInput = { ...req.user };
 
-      createSocialUserInput.password = await bcrypt.hash(
-        createSocialUserInput.password,
-        10,
-      );
-      await this.userService.createSocial({ createSocialUserInput });
-      this.setRefreshToken({ user, req, res });
-      res.redirect('https://wetrekking.kr/social');
-    } else if (!user.phone) {
-      this.setRefreshToken({ user, req, res });
-      res.redirect('https://wetrekking.kr/social');
-    } else {
+      // createSocialUserInput.password = await bcrypt.hash(
+      //   createSocialUserInput.password,
+      //   10,
+      // );
+      // await this.userService.createSocial({ createSocialUserInput });
+
+      res.redirect('https://wetrekking.kr/join');
+    }
+
+    // else if (!user.phone) {
+    //   this.setRefreshToken({ user, req, res });
+    //   res.redirect('https://wetrekking.kr/social');
+    // }
+    else {
       this.setRefreshToken({ user, res, req });
       res.redirect('https://wetrekking.kr');
     }
