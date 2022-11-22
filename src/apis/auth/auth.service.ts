@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../users/user.service';
-import * as bcrypt from 'bcrypt';
+// import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -66,6 +66,7 @@ export class AuthService {
       // await this.userService.createSocial({ createSocialUserInput });
 
       res.redirect('https://wetrekking.kr/join');
+      throw new Error('소셜로그인은 해당 이메일로 회원가입 후 이용가능합니다.');
     }
 
     // else if (!user.phone) {
