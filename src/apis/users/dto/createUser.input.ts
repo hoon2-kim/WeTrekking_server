@@ -24,6 +24,9 @@ export class CreateUserInput {
   @Field(() => String, { nullable: true })
   gender: string;
 
-  @Field(() => String, { nullable: true })
-  profile_img: string;
+  @Field(() => String, {
+    defaultValue:
+      'wetrekking-storage/userProfile/24d860b1-39ce-41fa-8d6b-0c4912ef1d74basic-profile.png',
+  })
+  profile_img?: string;
 }

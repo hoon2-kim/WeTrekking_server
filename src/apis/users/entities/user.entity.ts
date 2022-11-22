@@ -46,9 +46,9 @@ export class User {
   // 유저 프로필 이미지 폴더 따로 만들어서 string이 아니라 input으로 가져올지 고민(필수X) 이미지 디폴트
   @Column({
     default:
-      'https://storage.googleapis.com/wetrekking-storage/userProfile/04e5b38b-d44a-4863-a04d-82125bc90f75basic-profile.png',
+      'wetrekking-storage/userProfile/04e5b38b-d44a-4863-a04d-82125bc90f75basic-profile.png',
   })
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   profile_img: string;
 
   // 1,000 point
