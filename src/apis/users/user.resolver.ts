@@ -155,7 +155,7 @@ export class UserResolver {
     // @Args('nickname') nickname: string, //
     // @Args('phone') phone: string,
     // @Args('birth') birth: string,
-    @Args('phoneToken') phoneToken: string,
+    // @Args('phoneToken') phoneToken: string,
     // @Args('gender') gender: string,
     @Args('updateUserInput') updateUserInput: UpdateUserInput,
     // @Args('createSocialUserInput') createSocialUserInput: CreateSocialUserInput,
@@ -166,10 +166,10 @@ export class UserResolver {
     // const user = await this.userService.findOne({ email });
 
     // redis에서 phone.values 값과  유저가 적은 phoneToken이 일치 하지 않으면 에러
-    const redisPhoneToken = await this.cacheManager.get(updateUserInput.phone);
-    if (redisPhoneToken !== phoneToken) {
-      throw new Error('핸드폰 인증이 올바르지 않습니다.');
-    }
+//     const redisPhoneToken = await this.cacheManager.get(updateUserInput.phone);
+//     if (redisPhoneToken !== phoneToken) {
+//       throw new Error('핸드폰 인증이 올바르지 않습니다.');
+//     }
 
     // userRepository 에서 해당 정보 객체로 받아오기
     // user null값부분 업데이트하기
