@@ -287,8 +287,7 @@ export class CrewBoardService {
 
     await this.userRepository.update(
       { id: userId },
-      // { point: user.point - 500 },
-      { point: user.point }, // 개발중으로 아직 포인트 안뻇어감
+      { point: user.point - 500 },
     );
 
     const result = await this.crewBoardRepository.save({
