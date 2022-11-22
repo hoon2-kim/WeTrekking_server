@@ -166,6 +166,10 @@ export class UserResolver {
     // const user = await this.userService.findOne({ email });
 
     // redis에서 phone.values 값과  유저가 적은 phoneToken이 일치 하지 않으면 에러
+    const checkTokenTrue = await this.cacheManager.get(createUserInput.phone);
+    if (!checkTokenTrue) {
+      throw new Error('휴대폰 인증이 올바르지 않습니다.');
+    }
 //     const redisPhoneToken = await this.cacheManager.get(updateUserInput.phone);
 //     if (redisPhoneToken !== phoneToken) {
 //       throw new Error('핸드폰 인증이 올바르지 않습니다.');
