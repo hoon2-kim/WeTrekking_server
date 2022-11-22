@@ -48,7 +48,7 @@ export class User {
     default:
       'https://storage.googleapis.com/wetrekking-storage/userProfile/04e5b38b-d44a-4863-a04d-82125bc90f75basic-profile.png',
   })
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   profile_img: string;
 
   // 1,000 point
