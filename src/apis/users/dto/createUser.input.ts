@@ -24,6 +24,6 @@ export class CreateUserInput {
   @Field(() => String, { nullable: true })
   gender: string;
 
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   profile_img: string;
 }
