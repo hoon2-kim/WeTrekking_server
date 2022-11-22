@@ -274,8 +274,7 @@ export class CrewBoardService {
 
     const checkVaildCrewBoard = await this.findAllByUserId({ userId });
     if (checkVaildCrewBoard.length >= 3) {
-      // throw new Error('게시글은 3개까지만 작성 가능합니다!!!!');
-      console.log('게시글이 많지만 개발 중이기에 넘어가준다.');
+      throw new Error('게시글은 3개까지만 작성 가능합니다!!!!');
     }
 
     const user = await this.userRepository.findOne({
@@ -283,8 +282,7 @@ export class CrewBoardService {
     });
 
     if (user.point < 500) {
-      // throw new Error('포인트가 부족합니다!!!!!');
-      console.log('포인트가 부족하지만 개발 중이기에 넘어가준다.');
+      throw new Error('포인트가 부족합니다!!!!!');
     }
 
     await this.userRepository.update(
