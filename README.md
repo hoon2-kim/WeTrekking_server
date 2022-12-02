@@ -67,6 +67,8 @@
 <img src="https://user-images.githubusercontent.com/107983013/205201424-5f99dc2d-7b9a-44e5-8f1e-512b1e2cd9aa.png">
 </p>
 
+<br><br>
+
 # 🗂 프로젝트 폴더 구조
 
 ```
