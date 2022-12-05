@@ -258,15 +258,6 @@
 
 <br><br>
 
-# 💻 프로젝트 설치 및 실행
-
-1. Repository를 Fork 한다.
-2. git clone 한다.
-3. yarn install 한다.
-4. docker-compose -f docker-compose.dev.yaml up --build 한다.
-
-<br><br>
-
 # 🔒 env
 
 ```
