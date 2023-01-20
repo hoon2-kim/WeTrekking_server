@@ -1,14 +1,16 @@
-# ⛰ 귀염 2조 - WeTrekking
+# ⛰ WeTrekking
 
 <p align="center">
+<br>
 <img width="60%" src="https://user-images.githubusercontent.com/107983013/205194971-11f741b7-a8cf-488b-981d-3de0e8c2c658.png">
+</br>
 </p>
 
-<br><br>
+## 프로젝트 소개
 
-# 📝 WeTrekking 소개
+<p align="justify">
 
-**위트레킹**은 기존의 동호회와는 달리
+**WeTrekking**은 기존의 동호회와는 달리
 
 등산이라는 취미를 가진 여러 다양한 사람들이 모여 일회성 크루를 형성해주는 서비스를 제공합니다.
 
@@ -20,278 +22,61 @@
 
 **위트레킹을 이용해보시는 것은 어떨까요?**
 
-<br><br>
-
-# 😄 배포 주소
-
-**✨ WeTrekking** : https://wetrekking.kr
-
-<br><br>
-
-# ❤️ 팀원 소개
-
-<p align="center">
-<img width="60%" src="https://user-images.githubusercontent.com/107983013/205196274-f22c0a63-dd07-4912-81f5-e8ab8e1ea1c8.jpeg">
-<img width="60%" src="https://user-images.githubusercontent.com/107983013/205196658-81a115c7-6734-4e66-b5e1-5acecf64d278.jpeg">
+### [URL] : https://wetrekking.kr
 </p>
 
-<br><br>
+<br>
 
-# 🛠 기술 스택
+## 백엔드 기술 스택
 
-<p align="center">
-<img width="60%" src="https://user-images.githubusercontent.com/107983013/205196814-f1ed73f8-7eb5-4b91-bdf2-34d80bdd2cf0.jpeg">
+Javascript, Typescript, NestJS, TypeORM, GraphQL, MySQL, MongoDB, Redis, WebSocket
+
+
+<br>
+
+## 담당 역할
+
+- 등산로 API [바로가기](https://github.com/hoon2-kim/WeTrekking_server/tree/develop/src/apis/trekking)
+- 채팅 API [바로가기](https://github.com/hoon2-kim/WeTrekking_server/tree/develop/src/apis/chat)
+- 포인트 이용내역 API [바로가기](https://github.com/hoon2-kim/WeTrekking_server/tree/develop/src/apis/pointHistory)
+- 댓글,대댓글 API [바로가기](https://github.com/hoon2-kim/WeTrekking_server/tree/develop/src/apis/crewComments)
+- Git 관리자
+- API Docs 제작
+
+<br>
+
+## 팀 프로젝트를 통해 배운점
+
+<p align="justify">
+
+### 팀프로젝트를 통해 배운점
+
+- 공공데이터포털 활용
+
+팀프로젝트인 wetrekking에서 메인 기능 중 하나인 등산로 보여주기를 맡게 되었고, 백엔드인 저는 전국 등산로의 좌표를 추출하여 프론트에게 넘겨야 했습니다.
+그래서 저는 V월드의 등산로 오픈API를 사용하기로 결정하였습니다.
+
+V월드의 등산로 오픈API를 활용하여 읍면동코드와 산 이름을 입력하게 되면 해당 산의 등산로 좌표가 나오도록 구현을 하였습니다.
+읍면동코드 입력을 위해 읍,면,리를 입력하면 읍면동코드가 나오는 오픈API를 하나 더 활용하였습니다.
+하지만 오픈API를 이용한 방식의 단점으로 해당 산의 주소와 읍면동이 일치하지 않으면 결과가 나오지 않았습니다.
+
+그래서 두번째 방법으로 산림청 홈페이지의 데이터를 이용하였습니다. 전국 등산로의 정보와 좌표가 GPX파일에 담겨 있었고, GPX파일을 QGIS라는 프로그램을 이용하여
+등산로의 이름, 난이도, 좌표만을 추출하여 JSON파일로 가공하였습니다. 그리고 JSON파일의 정보들을 MongoDB에 저장하여 산 이름을 검색하면 등산로 좌표가 나오는
+조회API를 작성하였습니다.
+
+이러한 역할을 맡은 계기로 다양한 공공데이터포털을 사용해볼 수 있게 되었으며, 활용방법도 알게 되었습니다.
+
+- 협업의 중요성
+
+부트캠프에서 프로젝트 팀 편성이 되었을 때, 저를 포함한 팀원 전부가 팀 프로젝트 경험이 처음이라 다들 걱정이 많았습니다.
+특히, 프론트엔드와 백엔드간의 소통이 제일 힘들었던거 같습니다. 프론트엔드에서는 백엔드에 대해 잘 몰랐으며, 마찬가지로 백엔드에서도 프론트엔드에 대해 몰라서
+작업 도중 서로 우리 쪽에서는 이렇게 하면 되는데 왜? 저 쪽에서는 안된다고 할까? 라고 생각이 많이 들었습니다.
+그래서 처음에는 의견충돌도 많았고 기획도 계속해서 변경이 되었습니다.
+
+그래서 이러한 충돌을 해결하기 위해 매일 프론트와 백엔드가 같이 모여 회의를 진행하였으며, 서로가 모르는 부분과 이해하지 못하는 부분을 설명해주며 하나하나씩 의견출동을
+해결해 나갔습니다.
+
+이러한 경험을 통해 얻은 교훈은 서로의 입장에서만 생각하면 안되고 대화를 통해 의견을 조율해 나가는 과정이 매우 중요하다는 것을 알게되었습니다.
+
 </p>
-
-<br><br>
-
-# ⭐️ Data Flow
-
-<p align="center">
-<img width="50%" src="https://user-images.githubusercontent.com/107983013/205197140-f3e83eaa-d6f6-4d0c-95de-3c528c5a701c.png">
-</p>
-
-<br><br>
-
-# 🌈 ERD
-
-<p align="center">
-<img width="70%" src="https://user-images.githubusercontent.com/107983013/205197502-c8e61906-a0f7-4860-b081-aab881a3b5c5.png">
-</p>
-
-<br><br>
-
-# 📔 API Docs
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/107983013/205201424-5f99dc2d-7b9a-44e5-8f1e-512b1e2cd9aa.png">
-</p>
-
-<br><br>
-
-# 🗂 프로젝트 폴더 구조
-
-```
-📁wetrekking-server
-├── .vscode
-│   └── settings.json
-├── elk
-│   └── logstash
-│       ├── logstash.conf
-│       ├── mysql-connector-java-8.0.28.jar
-├── src
-│   ├── apis
-│   │   ├── auth
-│   │   │   ├── auths.controller.ts
-│   │   │   ├── auths.module.ts
-│   │   │   ├── auths.resolver.ts
-│   │   │   └── auths.service.ts
-│   │   ├── chat
-│   │   │   ├── schemas
-│   │   │   │   └── chat.schema.ts
-│   │   │   │   └── room.schema.ts
-│   │   │   ├── chat.gateway.ts
-│   │   │   ├── chat.module.ts
-│   │   │   ├── chat.resolver.ts
-│   │   │   └── chat.service.ts
-│   │   ├── crewBoardImages
-│   │   │   ├── crewBoardImage.module.ts
-│   │   │   ├── crewBoardImage.resolver.ts
-│   │   │   ├── crewBoardImage.service.ts
-│   │   │   └── entities
-│   │   │       └── crewBoardImage.entity.ts
-│   │   ├── crewBoards
-│   │   │   ├── crewBoard.module.ts
-│   │   │   ├── crewBoard.resolver.ts
-│   │   │   ├── crewBoard.service.ts
-│   │   │   ├── dto
-│   │   │   │   ├── createCrewBoard.input.ts
-│   │   │   │   ├── crewBoardAndUser.output.ts
-│   │   │   │   ├── crewUserList.output.ts
-│   │   │   │   └── updateCrewBoard.input.ts
-│   │   │   └── entities
-│   │   │       └── crewBoard.entity.ts
-│   │   ├── crewComments
-│   │   │   ├── crewComment.module.ts
-│   │   │   ├── crewComment.resolver.ts
-│   │   │   ├── crewComment.service.ts
-│   │   │   ├── dto
-│   │   │   │   ├── createCrewComment.input.ts
-│   │   │   │   ├── createSubCrewComment.input.ts
-│   │   │   │   ├── updateCrewComment.input.ts
-│   │   │   │   └── updateSubCrewComment.input.ts
-│   │   │   └── entities
-│   │   │       └── crewComment.entity.ts
-│   │   ├── crewUserList
-│   │   │   ├── crewUserList.module.ts
-│   │   │   ├── crewUserList.resolver.ts
-│   │   │   ├── crewUserList.service.ts
-│   │   │   ├── dto
-│   │   │   │   └── crewUserList.output.ts
-│   │   │   └── entities
-│   │   │       └── crewUserList.entity.ts
-│   │   ├── dib
-│   │   │   ├── dib.module.ts
-│   │   │   ├── dib.resolver.ts
-│   │   │   ├── dib.service.ts
-│   │   │   ├── dto
-│   │   │   │   └── dibsWithCrewBoard.output.ts
-│   │   │   └── entities
-│   │   │       └── dib.entity.ts
-│   │   ├── email
-│   │   │   └── email.service.ts
-│   │   ├── files
-│   │   │   ├── file.module.ts
-│   │   │   ├── file.resolver.ts
-│   │   │   ├── file.service.ts
-│   │   │   └── postman.multiple.txt
-│   │   ├── iamport
-│   │   │   └── iamport.service.ts
-│   │   ├── likes
-│   │   │   ├── like.module.ts
-│   │   │   ├── like.resolver.ts
-│   │   │   ├── like.service.ts
-│   │   │   ├── entities
-│   │   │       └── like.entity.ts
-│   │   ├── mountains
-│   │   │   ├── mountain.module.ts
-│   │   │   ├── mountain.resolver.ts
-│   │   │   ├── mountain.service.ts
-│   │   │   └── entities
-│   │   │       └── mountain.entity.ts
-│   │   ├── phone
-│   │   │   ├── phone.module.ts
-│   │   │   ├── phone.resolver.ts
-│   │   │   └── phone.service.ts
-│   │   ├── pointHistory
-│   │   │   ├── pointHistory.module.ts
-│   │   │   ├── pointHistory.resolver.ts
-│   │   │   ├── pointHistory.service.ts
-│   │   │   └── entities
-│   │   │       └── pointHistory.entity.ts
-│   │   ├── pointPayments
-│   │   │   ├── pointPayment.html
-│   │   │   ├── pointPayment.module.ts
-│   │   │   ├── pointPayment.resolver.ts
-│   │   │   ├── pointPayment.service.ts
-│   │   │   └── entities
-│   │   │       └── pointPayment.entity.ts
-│   │   ├── reviewBoardImages
-│   │   │   ├── reviewBoardImage.module.ts
-│   │   │   ├── reviewBoardImage.resolver.ts
-│   │   │   ├── reviewBoardImage.service.ts
-│   │   │   └── entities
-│   │   │       └── reviewBoardImage.entity.ts
-│   │   ├── reviewBoards
-│   │   │   ├── reviewBoard.module.ts
-│   │   │   ├── reviewBoard.resolver.ts
-│   │   │   ├── reviewBoard.service.ts
-│   │   │   ├── dto
-│   │   │   │   ├── createReviewBoard.input.ts
-│   │   │   │   └── updateReviewBoard.input.ts
-│   │   │   └── entities
-│   │   │       └── reviewBoard.entity.ts
-│   │   ├── reviewComments
-│   │   │   ├── reviewComment.module.ts
-│   │   │   ├── reviewComment.resolver.ts
-│   │   │   ├── reviewComment.service.ts
-│   │   │   ├── dto
-│   │   │   │   └── updateReviewComment.input.ts
-│   │   │   └── entities
-│   │   │       └── reviewComment.entity.ts
-│   │   ├── reviewCount
-│   │   │   └── reviewCount.entity.ts
-│   │   ├── trekking
-│   │   │   ├── map.html
-│   │   │   ├── map2.html
-│   │   │   ├── trekking.module.ts
-│   │   │   ├── trekking.resolver.ts
-│   │   │   ├── trekking.service.ts
-│   │   │   └── schemas
-│   │   │   │   ├── trekking.schema.ts
-│   │   │   │   └── trekkingInfo.schema.ts
-│   │   ├── users
-│   │   │   ├── user.module.ts
-│   │   │   ├── user.resolver.ts
-│   │   │   ├── user.service.ts
-│   │   │   ├── dto
-│   │   │   │   ├── createSocialUser.input.ts
-│   │   │   │   ├── createUser.input.ts
-│   │   │   │   └── updateUser.input.ts
-│   │   │   └── entities
-│   │   │       └── user.entity.ts
-│   ├── commons
-│   │   ├── auth
-│   │   │   ├── gql-auth.guard.ts
-│   │   │   ├── jwt-access.strategy.ts
-│   │   │   ├── jwt-refresh.strategy.ts
-│   │   │   ├── jwt-social-google.strategy.ts
-│   │   │   ├── jwt-social-kakao.strategy.ts
-│   │   │   └── jwt-social-naver.strategy.ts
-│   │   ├── graphql
-│   │   │   └── schema.gql
-│   │   └── type
-│   │       └── context.ts 
-│   ├── app.controller.ts
-│   ├── app.module.ts
-│   ├── app.service.ts
-│   ├── main.ts
-│   └── static
-│       └── index.html
-├── .dockerignore
-├── .eslintrc.js
-├── .gitignore
-├── .prettierrc
-├── docker-compose.dev.yaml
-├── docker-compose.prod.yaml
-├── docker-compose.yaml
-├── Dockerfile
-├── Dockerfile.dev
-├── Dockerfile.prod
-├── nest-cli.json
-├── package.json
-├── README.md
-├── tsconfig.build.json
-├── tsconfig.json
-└── yarn.lock
-```
-
-<br><br>
-
-# 🔒 env
-
-```
-DATABASE_TYPE
-DATABASE_HOST
-DATABASE_PORT
-DATABASE_USERNAME
-DATABASE_PASSWORD
-DATABASE_DATABASE
-
-STORAGE_PROJECT_ID
-STORAGE_KEY_FILE_NAME
-STORAGE_BUCKET
-
-ACCESSTOKEN_KEY
-REFRESHTOKEN_KEY
-
-GOOGLE_CLIENT_ID
-GOOGLE_CLIENT_SECRET
-GOOGLE_CALLBACK_URL
-
-NAVER_CLIENT_ID
-NAVER_CLIENT_SECRET
-NAVER_CALLBACK_URL
-
-KAKAO_CLIENT_ID
-KAKAO_CLIENT_SECRET
-KAKAO_CALLBACK_URL
-
-EMAIL_USER
-EMAIL_PASS
-EMAIL_SENDER
-
-SMS_KEY
-SMS_SECRET
-SMS_SENDER
-```
+<br>
