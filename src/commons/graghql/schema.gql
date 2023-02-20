@@ -16,7 +16,7 @@ type User {
   birth: String!
   phone: String!
   gender: String!
-  profile_img: String
+  profile_img: String!
   point: Int!
 }
 
@@ -258,7 +258,7 @@ type Mutation {
   updatePassword(password: String!): String!
   checkEmail(email: String!): String!
   checkNickName(nickname: String!): String!
-  socialUpdateUser(phoneToken: String!, updateUserInput: UpdateUserInput!): User!
+  socialUpdateUser(updateUserInput: UpdateUserInput!): User!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(email: String!, updateUserInput: UpdateUserInput!): User!
   deleteUser(userId: String!): Boolean!
@@ -335,7 +335,7 @@ input UpdateUserInput {
   birth: String
   phone: String
   gender: String
-  profile_img: String
+  profile_img: String = "wetrekking-storage/userProfile/24d860b1-39ce-41fa-8d6b-0c4912ef1d74basic-profile.png"
 }
 
 input CreateUserInput {
@@ -346,7 +346,7 @@ input CreateUserInput {
   birth: String
   phone: String
   gender: String
-  profile_img: String
+  profile_img: String = "wetrekking-storage/userProfile/24d860b1-39ce-41fa-8d6b-0c4912ef1d74basic-profile.png"
 }
 
 input CreateCrewCommentInput {

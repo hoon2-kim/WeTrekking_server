@@ -48,6 +48,7 @@ import { PointHistoryModule } from './apis/pointHistory/pointHistory.module';
     CrewCommentModule,
     ChatModule,
     ReviewCommentModule,
+    ConfigModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graghql/schema.gql',
@@ -59,6 +60,7 @@ import { PointHistoryModule } from './apis/pointHistory/pointHistory.module';
           'https://wetrekking.kr',
           'http://localhost:5501',
           'http://localhost:5500',
+          'https://hoon2hoon2.site/graphql'
         ],
         credentials: true,
         exposedHeaders: ['Set-Cookie', 'Cookie'],
@@ -72,7 +74,6 @@ import { PointHistoryModule } from './apis/pointHistory/pointHistory.module';
         ],
       },
     }),
-    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: process.env.DATABASE_TYPE as 'mysql',
       host: process.env.DATABASE_HOST,
@@ -86,7 +87,7 @@ import { PointHistoryModule } from './apis/pointHistory/pointHistory.module';
     }),
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      url: 'redis://my-redis:6379',
+      url: 'redis://10.112.209.3:6379',
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGO_URI, {

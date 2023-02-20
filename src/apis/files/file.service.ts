@@ -12,7 +12,7 @@ export class FileService {
     const bucket = process.env.STORAGE_BUCKET;
     const storage = new Storage({
       projectId: process.env.STORAGE_PROJECT_ID,
-      keyFilename: process.env.STORAGE_KEY_FILE_NAME,
+      keyFilename: process.env.STORAGE_KEY_FILE_NAME || 'my-secret/gcp-file-storage.json',
     }).bucket(bucket);
 
     const result = await Promise.all(
